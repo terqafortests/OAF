@@ -1,12 +1,15 @@
 package masterpages;
 
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utils.ComplexReportFactory;
+import utils.ExtentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ public class AbstractPage extends PageHead
     public AbstractPage(WebDriver driver)
     {
         this.driver = driver;
+        this.extent_test = ComplexReportFactory.getTest();
     }
 
 //    public AbstractPage(WebDriver driver, ExtentTest extent_test)
@@ -151,12 +155,8 @@ public class AbstractPage extends PageHead
     //Opens URL
     public void navigate_to(PageUrls url)
     {
-//        synchronized (driver)
-//        {
             this.driver.get(url.GetEnumPageUrl().toString());
-//            ExtentManager.GetTest().log(LogStatus.INFO, "Opened url: '" + url.GetEnumPageUrl() + "'");
-//        }
-
+            extent_test.log(LogStatus.INFO, "Opened url: '" + url.GetEnumPageUrl().toString() + "'");
     }
 
     //Opens URL

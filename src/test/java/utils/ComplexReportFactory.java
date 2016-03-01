@@ -20,7 +20,7 @@ public class ComplexReportFactory
     {
         if (reporter == null)
         {
-            reporter = new ExtentReports("ComplexReport.html", true, DisplayOrder.NEWEST_FIRST);
+            reporter = new ExtentReports("/home/beetlezhuk/IdeaProjects/ASAOffshore/ComplexReport.html", true, DisplayOrder.NEWEST_FIRST);
         }
         return reporter;
     }

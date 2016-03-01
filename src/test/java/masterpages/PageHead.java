@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import utils.ComplexReportFactory;
+import utils.ExtentManager;
 import utils.SystemUtils;
 import java.lang.reflect.Method;
 
@@ -15,11 +16,13 @@ public class PageHead
     protected SystemUtils utils;
     protected PagesFactory factory;
     protected WebDriver driver;
+    String test_title;
 
 //    @Parameters({"browser", "test_name"})
-    @BeforeTest
+    @BeforeMethod
     public void setup(Method caller)//@Optional String browser, @Optional String test_name, x
     {
+        this.test_title = caller.getName();
         this.utils = new SystemUtils();
 
 //        if(browser != null)
@@ -60,9 +63,10 @@ public class PageHead
 //        this.driver.quit();
     }
 
-    @AfterSuite
+    @AfterMethod
     public void afterSuite()
     {
-
+        ComplexReportFactory.closeTest(test_title);
+        ComplexReportFactory.closeReport();
     }
 }

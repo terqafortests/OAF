@@ -28,29 +28,7 @@ public class PageHead extends WebBrowser
         this.test_title = caller.getName();
         this.utils = new SystemUtils();
 
-//        if(browser != null)
-//        {
-//            switch(browser)
-//            {
-//                case "chrome":
-//                    System.setProperty("webdriver.chrome.driver", utils.get_chrome_path());
-//                    this.driver = new ChromeDriver();
-//                    break;
-//
-//                case "firefox":
-//                    this.driver = new FirefoxDriver();
-//                    break;
-//
-//                default:
-//                    this.driver = new FirefoxDriver();
-//                    break;
-//            }
-//        }
-//        else
-//        {
-   //         System.setProperty("webdriver.chrome.driver", utils.get_chrome_path());
-            //this.driver = new FirefoxDriver();
-//        }
+
 
         ComplexReportFactory.getTest(caller.getName(), "Very cool report");
 //        this.factory = new PagesFactory(this.driver);

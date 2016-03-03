@@ -5,9 +5,7 @@ package masterpages;
  */
 public enum PageUrls
 {
-    LOGIN_PAGE ("http://test.salesforce.com"),
-    HOME_PAGE ("https://bpp-13fd3e55182--noahqa.cs17.my.salesforce.com/home/home.jsp"),
-    SEARCH_PAGE("https://bpp-13fd3e55182--noahqa.cs17.my.salesforce.com/search/AdvancedSearch");
+    SALESFORCE_LOGIN_PAGE("http://test.salesforce.com");
 
     private String url;
 

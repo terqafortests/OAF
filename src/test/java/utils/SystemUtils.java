@@ -133,17 +133,40 @@ public class SystemUtils
         if(this.get_os().contains("Linux"))
         {
             path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
-                    File.separator + "/chromedriver";
+                    File.separator + "chromedrivers" + File.separator + "chromedriver";
         }
         else if(this.get_os().contains("Mac"))
         {
             path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
-                    File.separator + "macdriver";
+                    File.separator + "chromedrivers" + File.separator + "macdriver";
         }
         else if(this.get_os().contains("Windows"))
         {
             path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
-                    File.separator + "windriver.exe";
+                    File.separator + "chromedrivers" + File.separator +  "windriver.exe";
+        }
+
+        return path;
+    }
+
+    public String get_opera_path()
+    {
+        String path = "";
+
+        if(this.get_os().contains("Linux"))
+        {
+            path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
+                    File.separator + "operadrivers" + File.separator + "operalinuxdriver";
+        }
+        else if(this.get_os().contains("Mac"))
+        {
+            path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
+                    File.separator + "operadrivers" + File.separator + "operamacdriver";
+        }
+        else if(this.get_os().contains("Windows"))
+        {
+            path = get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "webdrivers" +
+                    File.separator + "operadrivers" + File.separator +  "operawindriver64.exe";
         }
 
         return path;

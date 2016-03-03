@@ -5,44 +5,74 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import utils.ComplexReportFactory;
-import utils.ExtentManager;
 import utils.SystemUtils;
-import utils.WebBrowser;
 
 import java.lang.reflect.Method;
 
 /**
  * Created by beetlezhuk on 11/19/15.
  */
-public class PageHead extends WebBrowser
+public class PageHead
 {
     protected SystemUtils utils;
     protected PagesFactory factory;
-//    protected WebDriver driver;
-    String test_title;
+    protected WebDriver driver;
+    protected String mvn_browser_param;
+    protected String browser;
+    protected String test_title;
 
-//    @Parameters({"browser", "test_name"})
+    @Parameters({"xml_browser"})
     @BeforeMethod
-    public void setup(Method caller)//@Optional String browser, @Optional String test_name, x
+    public void setup(@Optional (value = "Firefox") String xml_browser, Method caller)
     {
-        this.test_title = caller.getName();
+        test_title = caller.getName().replace("_", " ");
+        mvn_browser_param = String.valueOf(System.getProperty("browser"));
+
+        if(mvn_browser_param != null)
+        {
+            browser = mvn_browser_param;
+        }
+        else
+        {
+            browser = xml_browser;
+        }
+
+//        this.test_title = caller.getName();
         this.utils = new SystemUtils();
 
+        if (browser.equalsIgnoreCase("Firefox"))
+        {
+            driver = new FirefoxDriver();
+            System.out.println("Firefox has started");
+        }
+        else if (browser.equalsIgnoreCase("Chrome"))
+        {
+            System.setProperty("webdriver.chrome.driver", utils.get_chrome_path());
+            driver = new ChromeDriver();
+            System.out.println("Chrome has started");
+        }
+//        else if (browser.equalsIgnoreCase("IE"))
+//        {
+//            System.setProperty("webdriver.ie.driver", "./resources/IEDriverServer.exe");
+//            driver = new InternetExplorerDriver();
+//        }
+//        else if (browser.equalsIgnoreCase("Opera"))
+//        {
+//            System.setProperty("webdriver.opera.driver", utils.get_opera_path());
+//            driver = new OperaDriver();
+//        }
+        driver.manage().window().maximize();
 
+        ComplexReportFactory.getTest(test_title);
+        this.factory = new PagesFactory(driver);
 
-        ComplexReportFactory.getTest(caller.getName(), "Very cool report");
-//        this.factory = new PagesFactory(this.driver);
-        this.factory = new PagesFactory(Driver());
-//      this.driver.manage().window().maximize();
-//        entered_values = new EnteredTestData();
-//        read_keywords = new ReadExcellKeywords(driver, entered_values);
     }
 
     @AfterMethod
     public void tearDown(Method caller)
     {
-//        this.driver.close();
-//        this.driver.quit();
+        this.driver.close();
+        this.driver.quit();
     }
 
     @AfterMethod

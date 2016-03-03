@@ -4,6 +4,7 @@ import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +19,12 @@ public class ComplexReportFactory
 
     private synchronized static ExtentReports getExtentReport()
     {
+        SystemUtils utils = new SystemUtils();
+
         if (reporter == null)
         {
-            reporter = new ExtentReports("/home/beetlezhuk/IdeaProjects/ASAOffshore/ComplexReport.html", true, DisplayOrder.NEWEST_FIRST);
+            reporter = new ExtentReports(utils.get_app_root() + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "reports" +
+                    File.separator + utils.get_date() + "_Report.html", false, DisplayOrder.NEWEST_FIRST);
         }
         return reporter;
     }

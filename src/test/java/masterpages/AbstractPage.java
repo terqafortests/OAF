@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import utils.ComplexReportFactory;
-import utils.ExtentManager;
 
 import java.util.ArrayList;
 import java.util.List;

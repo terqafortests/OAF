@@ -2,8 +2,7 @@ package masterpages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import pages.LoginPage;
-import pages.MyLearningPage;
+import pages.SalesforceLoginPage;
 
 /**
  * Created by beetlezhuk on 11/19/15.
@@ -15,13 +14,8 @@ public class PagesFactory extends AbstractPage
         super(driver);
     }
 
-    public LoginPage login_page()
+    public SalesforceLoginPage Salesforce_Login_Page()
     {
-        return PageFactory.initElements(driver, LoginPage.class);
-    }
-
-    public MyLearningPage my_learning_page()
-    {
-        return PageFactory.initElements(driver, MyLearningPage.class);
+        return PageFactory.initElements(driver, SalesforceLoginPage.class);
     }
 }

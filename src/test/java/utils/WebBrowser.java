@@ -22,7 +22,7 @@ public class WebBrowser {
 	private WebDriver driver = threadLocalDriver.get();
 
 	@Parameters("browser")
-	@BeforeTest
+	//@BeforeTest
 	public void initWebBrowser(@Optional(value = "Firefox") String browser) {
 						
 	

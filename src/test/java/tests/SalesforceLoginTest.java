@@ -15,6 +15,7 @@ public class SalesforceLoginTest extends PageHead
                 Open().
                 Enter_Username("adminlite.user.offshoreqa777@yahoo.com.ies.qa").
                 Enter_Password("Qwerty2@").
-                Click_On_Login_Btn();
+                Click_On_Login_Btn().
+                Verify_User_Is_Logged_In();
     }
 }

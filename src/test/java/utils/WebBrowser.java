@@ -45,7 +45,7 @@ public class WebBrowser {
 		driver.manage().window().maximize();
 	}
 
-	public static WebDriver Driver() {	
+	public WebDriver Driver() {
 		return threadLocalDriver.get();
 	}
 	 

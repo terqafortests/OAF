@@ -1,6 +1,5 @@
 package pages;
 
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import masterpages.AbstractPage;
 import masterpages.PageUrls;
@@ -8,19 +7,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import utils.ComplexReportFactory;
 
 /**
  * Created by beetlezhuk on 11/19/15.
  */
 public class SalesforceLoginPage extends AbstractPage
 {
-    ExtentTest test_reporter;
 
     public SalesforceLoginPage(WebDriver driver)
     {
         super(driver);
-        test_reporter = ComplexReportFactory.getTest();
     }
 
     @FindAll({@FindBy(id = "username"), @FindBy(name = "username")})
@@ -44,7 +40,7 @@ public class SalesforceLoginPage extends AbstractPage
     {
             waitForElementPresent(username_txt, 5);
             username_txt.sendKeys(usr);
-            test_reporter.log(LogStatus.INFO, "Username entered: '" + usr + "'");
+            extent_test.log(LogStatus.INFO, "Username entered: '" + usr + "'");
 
         return this;
     }
@@ -53,7 +49,7 @@ public class SalesforceLoginPage extends AbstractPage
     {
         waitForElementPresent(password_txt, 5);
         password_txt.sendKeys(pass);
-        test_reporter.log(LogStatus.INFO, "Password entered: '" + pass + "'");
+        extent_test.log(LogStatus.INFO, "Password entered: '" + pass + "'");
 
         return this;
     }
@@ -62,7 +58,15 @@ public class SalesforceLoginPage extends AbstractPage
     {
         waitForElementPresent(login_btn, 2);
         login_btn.click();
-        test_reporter.log(LogStatus.PASS, "Login button clicked");
+        extent_test.log(LogStatus.PASS, "Login button clicked");
+
+        return this;
+    }
+
+    public SalesforceLoginPage Verify_User_Is_Logged_In()
+    {
+        super.sleep(2000);
+        super.PageReached(PageUrls.SALESFORCE_HOME_PAGE);
 
         return this;
     }

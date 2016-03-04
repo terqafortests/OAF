@@ -2,16 +2,16 @@ package masterpages;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import utils.ComplexReportFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by beetlezhuk on 11/19/15.
@@ -52,62 +52,62 @@ public class AbstractPage extends PageHead
 //        return element;
 //    }
 //
-//    //Returns Select object
-//    protected Select get_select(WebElement element)
-//    {
-//        Select select = null;
-//
-//        try
-//        {
-//            select = new Select(element);
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//        return select;
-//    }
-//
-//    //Selects multiple values in drop down
-//    protected void select_multiselect(WebElement select, List<String> select_values)
-//    {
-//        Select dropdown = this.get_select(select);
-//
-//        try
-//        {
-//            for(String item : select_values)
-//            {
-//                dropdown.selectByVisibleText(item);
-//            }
-//        }
-//        catch(ElementNotVisibleException e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    //Accepts alerts
-//    protected void accept_alert()
-//    {
-//        try
-//        {
-//            this.implicit_wait(0);
-//            Alert alert = this.driver.switchTo().alert();
-//            alert.accept();
-//            Thread.sleep(2000);
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    protected void implicit_wait(long time)
-//    {
-//        this.driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
-//    }
-//
+    //Returns Select object
+    protected Select get_select(WebElement element)
+    {
+        Select select = null;
+
+        try
+        {
+            select = new Select(element);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return select;
+    }
+
+    //Selects multiple values in drop down
+    protected void select_multiselect(WebElement select, List<String> select_values)
+    {
+        Select dropdown = this.get_select(select);
+
+        try
+        {
+            for(String item : select_values)
+            {
+                dropdown.selectByVisibleText(item);
+            }
+        }
+        catch(ElementNotVisibleException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    //Accepts alerts
+    protected void accept_alert()
+    {
+        try
+        {
+            this.implicit_wait(0);
+            Alert alert = this.driver.switchTo().alert();
+            alert.accept();
+            Thread.sleep(2000);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    protected void implicit_wait(long time)
+    {
+        this.driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+    }
+
     protected void waitForElementPresent(final WebElement element, int timeout)
     {
         WebDriverWait wait = (WebDriverWait) new WebDriverWait(driver, timeout)
@@ -134,7 +134,18 @@ public class AbstractPage extends PageHead
 
     public void PageReached(PageUrls url)
     {
-        Assert.assertEquals(get_curr_url(), url.GetEnumPageUrl().toString());
+        try
+        {
+            Assert.assertEquals(get_curr_url(), url.GetEnumPageUrl().toString());
+        }
+        catch (AssertionError assertion_error)
+        {
+            extent_test.log(LogStatus.FAIL, "<b>Expected URL:</b> " + url.GetEnumPageUrl().toString() + " \n<b>But Actual:</b> " + get_curr_url());
+        }
+        catch(Exception e)
+        {
+            extent_test.log(LogStatus.FAIL, "<b>Expected URL:</b> " + url.GetEnumPageUrl().toString() + " \n<b>But Actual:</b> " + get_curr_url());
+        }
     }
 //
 //    //Refreshes pages

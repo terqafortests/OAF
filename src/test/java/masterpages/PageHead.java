@@ -20,6 +20,7 @@ public class PageHead
     protected String mvn_browser_param;
     protected String browser;
     protected String test_title;
+    private static ThreadLocal<WebDriver> threadLocalDriver;
 
     @Parameters({"xml_browser"})
     @BeforeMethod
@@ -36,8 +37,6 @@ public class PageHead
         {
             browser = xml_browser;
         }
-
-//        this.test_title = caller.getName();
         this.utils = new SystemUtils();
 
         if (browser.equalsIgnoreCase("Firefox"))
@@ -61,6 +60,12 @@ public class PageHead
 //            System.setProperty("webdriver.opera.driver", utils.get_opera_path());
 //            driver = new OperaDriver();
 //        }
+        else
+        {
+            System.setProperty("webdriver.chrome.driver", utils.get_chrome_path());
+            driver = new ChromeDriver();
+            System.out.println("Chrome has started");
+        }
         driver.manage().window().maximize();
 
         ComplexReportFactory.getTest(test_title);
@@ -71,8 +76,8 @@ public class PageHead
     @AfterMethod
     public void tearDown(Method caller)
     {
-        this.driver.close();
-        this.driver.quit();
+//        this.driver.close();
+//        this.driver.quit();
     }
 
     @AfterMethod
